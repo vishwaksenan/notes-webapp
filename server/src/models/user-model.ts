@@ -7,6 +7,10 @@ export interface IUser {
 }
 
 
+
+
+
+
 /**
  * Get a new User object.
  * 

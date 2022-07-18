@@ -10,6 +10,8 @@ import 'express-async-errors';
 import apiRouter from './routes/api';
 import logger from 'jet-logger';
 import { CustomError } from '@shared/errors';
+import mongoose, {ObjectId} from 'mongoose';
+import Notes from '@models/notes-model';
 
 
 // Constants
@@ -66,11 +68,46 @@ const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
 
 // Serve index.html file
-app.get('*', (_: Request, res: Response) => {
-    res.sendFile('index.html', {root: viewsDir});
+app.get('/', async (_: Request, res: Response) => {
+    const notes = await Notes.find();
+    console.log(notes);
+    res.send('Found all post');
+});
+
+app.post('/noteSearch', async (req: Request, res: Response) => {
+    const note = await Notes.findById(req.body.id);
+    console.log(note);
+    res.send(note);
+});
+
+app.post('/noteUpdate', async (req: Request, res:Response) => {
+    const foundPostObj = new Notes(await Notes.findOne({ _id: req.body.id }));
+    foundPostObj.title = req.body.title;
+    foundPostObj.description = req.body.description;
+    foundPostObj.save()
+    res.send('Record updated')
+})
+
+app.post('/noteDelete', async (req:Request, res:Response) => {
+    await Notes.findByIdAndDelete({ _id: req.body.id })
+    res.send('Record Deleted')
+})
+
+
+app.post('/noteInsert', async (req: Request, res: Response) => {
+    const NoteObj = new Notes({
+        title: req.body.title,
+        description: req.body.title, 
+    })
+    await NoteObj.save();
+    res.send('Post Request Made');
 });
 
 
+// Connect to DB
+mongoose.connect('mongodb+srv://vishwaksenan:vish1998o@cluster0.sxlo4.mongodb.net/?retryWrites=true&w=majority')
+.then(()=>console.log('connected'))
+.catch(e=>console.log(e));
 
 // Export here and start in a diff file (for testing).
 export default app;
