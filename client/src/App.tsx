@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import CardListComponent from './components/CardList';
+import CardViewComponent from './components/CardView';
 
 function App() {
   const notesTitle = ['Title 1', 'Title 2', 'Title 3']
@@ -47,6 +49,8 @@ function App() {
           <button>Delete</button>
         </div>
       </div>
+      <CardListComponent />
+      <CardViewComponent />
     </div>
   );
 }
