@@ -1,9 +1,28 @@
-import { CardViewContainer } from "./CardView"
+import { CardViewContainer, CardViewTitleContainer, CardTitle, CardViewDescriptionContainer, CardDescription, CardViewSettingsContainer, CardUpdate, CardDelete } from "./CardView"
 import React from 'react'
 
-const CardViewComponent = () => {
+
+interface NotesProps {
+  NotesDetails:{
+    title: string,
+    description: string
+  };
+}
+
+const CardViewComponent = ({ NotesDetails }: NotesProps) => {
   return (
-    <CardViewContainer>CardVIewContainer</CardViewContainer>
+    <CardViewContainer>
+      <CardViewTitleContainer contentEditable={true}>
+        <CardTitle>{NotesDetails.title}</CardTitle>
+      </CardViewTitleContainer>
+      <CardViewDescriptionContainer contentEditable={true}>
+        <CardDescription>{NotesDetails.description}</CardDescription>
+      </CardViewDescriptionContainer>
+      <CardViewSettingsContainer>
+        <CardUpdate>Update</CardUpdate>
+        <CardDelete>Delete</CardDelete>
+      </CardViewSettingsContainer>
+    </CardViewContainer>
   )
 }
 

@@ -21,36 +21,8 @@ function App() {
   ]
   return (
     <div className="App">
-      <div className="notes-title">
-        <div className='note-card-container'>
-          <div className="note-card">
-            <p>Title 1</p>
-          </div>
-          <div className="note-card">
-            <p>Title 2</p>
-          </div>
-          <div className="note-card">
-            <p>Title 3</p>
-          </div>
-        </div>
-        <div>
-          <button>Create a new</button>
-        </div>
-      </div>
-      <div className="notes-view">
-        <div className="note-title-view" contentEditable={true}>
-          <p>Title 1</p>
-        </div>
-        <div className="note-description" contentEditable={true}>
-          <p>Description 1</p>
-        </div>
-        <div className="button-section">
-          <button>Update</button>
-          <button>Delete</button>
-        </div>
-      </div>
-      <CardListComponent />
-      <CardViewComponent />
+      <CardListComponent NotesList={notesTitle}/>
+      <CardViewComponent NotesDetails={notes[1]}/>
     </div>
   );
 }
