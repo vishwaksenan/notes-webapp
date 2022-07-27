@@ -1,4 +1,4 @@
-import {CardListContainer, CardListSection, List, NotesCreateButton} from './CardList'
+import {CardListContainer, CardListSection, List} from './CardList'
 import React from 'react'
 
 interface NotesDetails {
@@ -13,7 +13,6 @@ type NotesDetailsList = {
 };
 
 const CardListComponent = ({ NotesList }: NotesDetailsList) => {
-  console.log(NotesList)
   return (
     <CardListContainer>
       <>
@@ -21,9 +20,6 @@ const CardListComponent = ({ NotesList }: NotesDetailsList) => {
         NotesList.map((notes) => <CardListSection><List>{notes}</List></CardListSection>)
       }
       </>
-      <CardListSection>  
-        <NotesCreateButton>Create</NotesCreateButton>
-      </CardListSection> 
     </CardListContainer>
   )
 }

@@ -12,6 +12,7 @@ import logger from 'jet-logger';
 import { CustomError } from '@shared/errors';
 import mongoose, {ObjectId} from 'mongoose';
 import Notes from '@models/notes-model';
+import cors from 'cors';
 
 
 // Constants
@@ -26,6 +27,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
+app.use(cors());
 
 // Show routes called in console during development
 if (process.env.NODE_ENV === 'development') {
@@ -70,13 +72,11 @@ app.use(express.static(staticDir));
 // Serve index.html file
 app.get('/', async (_: Request, res: Response) => {
     const notes = await Notes.find();
-    console.log(notes);
-    res.send('Found all post');
+    res.send(notes);
 });
 
 app.post('/noteSearch', async (req: Request, res: Response) => {
     const note = await Notes.findById(req.body.id);
-    console.log(note);
     res.send(note);
 });
 
@@ -85,7 +85,7 @@ app.post('/noteUpdate', async (req: Request, res:Response) => {
     foundPostObj.title = req.body.title;
     foundPostObj.description = req.body.description;
     foundPostObj.save()
-    res.send('Record updated')
+    res.send('Record successfully updated')
 })
 
 app.post('/noteDelete', async (req:Request, res:Response) => {
