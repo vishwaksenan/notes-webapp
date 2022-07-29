@@ -8,20 +8,20 @@ interface NotesDetails {
   };
 }
 
-type NotesDetailsList = {
-  NotesList: string[];
-};
+type NotesList = string[];
 
-const CardListComponent = ({ NotesList }: NotesDetailsList) => {
+const CardListComponent = (NotesListProp: NotesList) => {
   return (
     <CardListContainer>
       <>
       {
-        NotesList.map((notes) => <CardListSection><List>{notes}</List></CardListSection>)
+        NotesListProp.map((key, notes) => <CardListSection key={key}><List>{notes}</List></CardListSection>)
       }
       </>
     </CardListContainer>
   )
 }
+
+CardListComponent.propTypes = {}
 
 export default CardListComponent

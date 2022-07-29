@@ -12,6 +12,10 @@ export const CardListSection = styled.div`
   height: 60px;
   width: 100px;
   border: 2px solid grey;
+  cursor: pointer;
+  :hover{
+    color: aqua;
+  }
 `
 
 export const List = styled.p`

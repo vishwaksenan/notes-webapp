@@ -69,6 +69,12 @@ function App() {
     )
   }
 
+  const dummyNotesTitle:string[] = ['Title 1', 'Title 2', 'Title 3']
+
+  const setPosValueFromChild = (posValue:number) => {
+    console.log(posValue)
+  }
+
   useEffect(() => {
     const url:string = "http://localhost:3000/"
     fetchNotes(url);
@@ -78,7 +84,8 @@ function App() {
   return (
     <div className="App">
       <div className="core-object">
-        <CardListComponent NotesList={notesTitle}/>
+        {/* string list prop */}
+        <CardListComponent NotesListProp={['']}/>
         <CardViewComponent NotesDetails={notes[selectedPos]}/>
       </div>
       <div className="settings-button-container">
