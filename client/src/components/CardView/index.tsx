@@ -1,32 +1,37 @@
-import { CardViewContainer, CardViewTitleContainer, CardTitle, CardViewDescriptionContainer, CardDescription} from "./CardView"
+import { CardViewContainer, CardViewTitleContainer, CardTitle, CardViewDescriptionContainer, CardDescription, CardViewForm} from "./CardView"
 import React from 'react'
 
 
 interface NotesProps {
   NotesDetails:{
+    id: string,
     title: string,
     description: string
   };
+  updateContent: () => void
 }
 
-const CardViewComponent = ({ NotesDetails }: NotesProps) => {
+const CardViewComponent = ({ NotesDetails, updateContent }: NotesProps) => {
   return (
     <CardViewContainer>
-      <CardViewTitleContainer contentEditable={true} suppressContentEditableWarning={true}>
-        {
-          NotesDetails ?
-          <CardTitle>{NotesDetails.title}</CardTitle>
-          : <CardTitle>Dummy Title</CardTitle>
-        }
-        
-      </CardViewTitleContainer>
-      <CardViewDescriptionContainer contentEditable={true} suppressContentEditableWarning={true}>
-        {
-          NotesDetails ? 
-          <CardDescription>{NotesDetails.description}</CardDescription>
-          : <CardDescription>Dummy Description</CardDescription>
-        }
-      </CardViewDescriptionContainer>
+      <CardViewForm>
+        <CardViewTitleContainer contentEditable={true} suppressContentEditableWarning={true}>
+          {
+            NotesDetails ?
+            <CardTitle type="text" value={NotesDetails.title} placeholder="Note Title"/>
+            : <CardTitle type="text" value="Dummy Title" placeholder="Note Title"/>
+          }
+          
+        </CardViewTitleContainer>
+        <CardViewDescriptionContainer contentEditable={true} suppressContentEditableWarning={true}>
+          {
+            NotesDetails ? 
+            <CardDescription value={NotesDetails.description} placeholder="Note Description"/>
+            : <CardDescription value="Dummy description" placeholder="Note Description"/>
+          }
+        </CardViewDescriptionContainer>
+      </CardViewForm>
+      
     </CardViewContainer>
   )
 }

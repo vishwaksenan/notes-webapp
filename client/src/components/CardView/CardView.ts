@@ -11,9 +11,9 @@ export const CardViewTitleContainer = styled.div`
   padding: 4px;
 `
 
-export const CardTitle = styled.p`
-  font-size: large;
-  font-weight: bolder;
+export const CardTitle = styled.input`
+  font-size: medium;
+  font-weight: normal;
 `
 
 export const CardViewDescriptionContainer = styled.div `
@@ -21,9 +21,12 @@ export const CardViewDescriptionContainer = styled.div `
   padding: 4px;
 ` 
 
-export const CardDescription = styled.p`
+export const CardDescription = styled.textarea`
   font-size: medium;
   font-weight: normal;
+  width: 100%;
+  height: 300px;
+  overflow: scroll;
 ` 
 
 export const CardViewSettingsContainer = styled.div`
@@ -42,4 +45,8 @@ export const CardDelete = styled.button`
   width: 70px;
   border-radius: 3px;
   margin: 3px;
+`
+
+export const CardViewForm = styled.form`
+
 `

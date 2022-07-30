@@ -2,20 +2,16 @@ import {CardListContainer, CardListSection, List} from './CardList'
 import React from 'react'
 
 interface NotesDetails {
-  NotesContent:{
-    title: string,
-    description: string
-  };
+  NoteList: string[];
+  changeSelect: (pos: number) => void
 }
 
-type NotesList = string[];
-
-const CardListComponent = (NotesListProp: NotesList) => {
+const CardListComponent = (props:NotesDetails) => {
   return (
     <CardListContainer>
       <>
       {
-        NotesListProp.map((key, notes) => <CardListSection key={key}><List>{notes}</List></CardListSection>)
+        props.NoteList.map((notes, key) => <CardListSection key={key} onClick={() => props.changeSelect(Number(key))}><List>{notes}</List></CardListSection>)
       }
       </>
     </CardListContainer>
