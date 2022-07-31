@@ -39,6 +39,14 @@ const CardViewComponent = ({ NotesDetails, fetchContent, NotesPos }: NotesProps)
     const topic = document.getElementById("title") as HTMLInputElement
     const desc = document.getElementById("description") as HTMLInputElement
     if(topic && desc){
+      if(!topic.value){
+        alert('Topic cannot be empty')
+        return
+      }
+      if(!desc.value){
+        alert('Description cannot be empty')
+        return
+      }
       const updatenote: UpdateNoteType = {
         id: noteid,
         title: topic.value,
