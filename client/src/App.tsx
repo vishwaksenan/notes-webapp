@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import CardListComponent from './components/CardList';
 import CardViewComponent from './components/CardView';
-import Axios from 'axios';
 import axios from 'axios';
 
 interface NotesDetails {
-  id: string,
+  _id: string,
   title: string,
   description: string
 }
@@ -35,22 +33,10 @@ function App() {
       description:'Description',
     }
     await axios.post('http://localhost:3000/noteInsert', newNote);
-    fetchNotes('http://localhost:3000/');
+    fetchNotes('http://localhost:3000/', selectedPos);
   }
 
-  const updateNote = async () => {
-    // const current_doc = ref.current
-    
-    // const updatedNote = {
-    //   id: notes[selectedPos].id,
-    //   title: noteTitle,
-    //   desciption:noteDescription,
-    // }
-    // await axios.post('http://localhost:3000/noteUpdate', updatedNote);
-    // fetchNotes('http://localhost:3000/');
-  }
-
-  const fetchNotes = async (url:string) => {
+  const fetchNotes = async (url:string, posNumber: number = 0) => {
     axios.get(
       url,
       {
@@ -69,6 +55,7 @@ function App() {
         }
         setNotes(data);
         setNotesTitle(notesTitle);
+        setPosValueFromChild(posNumber)
       }
     )
   }
@@ -78,7 +65,6 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(ref.current)
     const url:string = "http://localhost:3000/"
     fetchNotes(url);
     return () => {}
@@ -88,12 +74,10 @@ function App() {
     <div className="App">
       <div className="core-object">
         <CardListComponent NoteList={notesTitle} changeSelect={setPosValueFromChild}/>
-        <CardViewComponent NotesDetails = {notes[selectedPos]} updateContent={updateNote}/>
+        <CardViewComponent NotesDetails = {notes[selectedPos]} fetchContent={fetchNotes} NotesPos={selectedPos}/>
       </div>
       <div className="settings-button-container">
         <button onClick={() => createNewNote()}>Create</button>
-        <button onClick={() => updateNote()}>Delete</button>
-        <button onClick={() => updateNote()}>Update</button>
       </div>
       
     </div>

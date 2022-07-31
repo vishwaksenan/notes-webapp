@@ -12,8 +12,16 @@ export const CardViewTitleContainer = styled.div`
 `
 
 export const CardTitle = styled.input`
-  font-size: medium;
-  font-weight: normal;
+margin-top: 10px;
+border-color: rgba(33, 37, 41, 0.15);
+color: #292b2c;
+padding: 12px;
+border-radius: 0.25rem;
+line-height: 1.5;
+vertical-align: middle;
+&:focus {
+  outline: none;
+}
 `
 
 export const CardViewDescriptionContainer = styled.div `
