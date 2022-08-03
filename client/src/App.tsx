@@ -73,11 +73,10 @@ function App() {
   return (
     <div className="App">
       <div className="core-object">
-        <CardListComponent NoteList={notesTitle} changeSelect={setPosValueFromChild}/>
+        <CardListComponent NoteList={notesTitle} changeSelect={setPosValueFromChild} createNew={createNewNote}/>
         <CardViewComponent NotesDetails = {notes[selectedPos]} fetchContent={fetchNotes} NotesPos={selectedPos}/>
       </div>
       <div className="settings-button-container">
-        <button onClick={() => createNewNote()}>Create</button>
       </div>
       
     </div>
