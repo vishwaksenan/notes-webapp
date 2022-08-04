@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  express-server:
+    build: ./server
+    image: express-server
+    ports:
+      - "3000:8081"
+
+  react-client:
+    build: ./client
+    image: react-client
+    ports: 
+      - "5000:5000"
+    depends_on:
+      express-server: 
+        condition: service_started
+  
