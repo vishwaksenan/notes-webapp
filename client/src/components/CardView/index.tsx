@@ -18,6 +18,8 @@ interface UpdateNoteType {
   description: string,
 }
 
+axios.defaults.baseURL = process.env.REACT_APP_HOST_URL
+
 const CardViewComponent = ({ NotesDetails, fetchContent, NotesPos }: NotesProps) => {
 
   const [title, setTitle] = useState<string>("")
