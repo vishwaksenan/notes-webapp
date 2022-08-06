@@ -15,11 +15,6 @@ interface NewNoteType {
   description: string
 }
 
-// const deleteNote = async (url:string, noteID: string) => {
-//   await axios.post(url, noteID);
-//   fetchNotes(url);
-// }
-
 function App() {
   const [notes, setNotes] = useState<NotesDetails[]>([]);
   const [notesTitle, setNotesTitle] = useState<string[]>([]);
@@ -32,8 +27,8 @@ function App() {
       title:'Title',
       description:'Description',
     }
-    await axios.post('http://localhost:3000/noteInsert', newNote);
-    fetchNotes('http://localhost:3000/', selectedPos);
+    await axios.post('/api/noteInsert', newNote);
+    fetchNotes('/api/', selectedPos);
   }
 
   const fetchNotes = async (url:string, posNumber: number = 0) => {
@@ -65,7 +60,7 @@ function App() {
   }
 
   useEffect(() => {
-    const url:string = "http://localhost:3000/"
+    const url:string = "/api/"
     fetchNotes(url);
     return () => {}
   }, [])
@@ -75,8 +70,6 @@ function App() {
       <div className="core-object">
         <CardListComponent NoteList={notesTitle} changeSelect={setPosValueFromChild} createNew={createNewNote}/>
         <CardViewComponent NotesDetails = {notes[selectedPos]} fetchContent={fetchNotes} NotesPos={selectedPos}/>
-      </div>
-      <div className="settings-button-container">
       </div>
       
     </div>

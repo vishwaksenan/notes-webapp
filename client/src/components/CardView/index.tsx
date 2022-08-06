@@ -2,7 +2,6 @@ import { CardViewContainer, CardViewTitleContainer, CardTitle, CardViewDescripti
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
 
-
 interface NotesProps {
   NotesDetails:{
     _id: string,
@@ -52,8 +51,8 @@ const CardViewComponent = ({ NotesDetails, fetchContent, NotesPos }: NotesProps)
         title: topic.value,
         description: desc.value
       }
-      await axios.post('http://localhost:3000/noteUpdate', updatenote)
-      fetchContent('http://localhost:3000/', pos)
+      await axios.post('/api/noteUpdate', updatenote)
+      fetchContent('/api/', pos)
     }
   }
 
@@ -62,8 +61,8 @@ const CardViewComponent = ({ NotesDetails, fetchContent, NotesPos }: NotesProps)
     const deleteNote = {
       id: noteid
     }
-    await axios.post('http://localhost:3000/noteDelete', deleteNote);
-    (pos > 0) ? fetchContent('http://localhost:3000/', pos - 1): fetchContent('http://localhost:3000/', pos)
+    await axios.post('/api/noteDelete', deleteNote);
+    (pos > 0) ? fetchContent('/api/', pos - 1): fetchContent('/api/', pos)
     
   }
 
