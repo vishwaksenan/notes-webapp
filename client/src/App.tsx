@@ -67,6 +67,7 @@ function App() {
   
   return (
     <div className="App">
+      <h1>Notes Web App</h1>
       <div className="core-object">
         <CardListComponent NoteList={notesTitle} changeSelect={setPosValueFromChild} createNew={createNewNote}/>
         <CardViewComponent NotesDetails = {notes[selectedPos]} fetchContent={fetchNotes} NotesPos={selectedPos}/>
