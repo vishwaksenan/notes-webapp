@@ -26,5 +26,16 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ github.event.inputs.name }}"
+    - name: Connect to EC2 Instance
+      run: ssh ec2-user@13.40.169.202
+    
+    - name: Traverse into Repository
+      run: cd notes-webapp
+      
+    - name: Update the Repository
+      run: git pull
+    
+    - name: Build and Deploy Application
+      run: docker-compose up --build -d
+      
+      
