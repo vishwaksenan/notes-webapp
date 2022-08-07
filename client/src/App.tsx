@@ -27,7 +27,7 @@ function App() {
       title:'Title',
       description:'Description',
     }
-    await axios.post('/api/noteInsert', newNote);
+    await axios.post('/noteInsert/', newNote);
     fetchNotes('/api/', selectedPos);
   }
 
