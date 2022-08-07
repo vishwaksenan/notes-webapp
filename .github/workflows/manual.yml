@@ -1,47 +1,22 @@
-# This is a basic workflow that is manually triggered
-
-name: Manual workflow
-
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
+name: remote ssh command
 on:
-  workflow_dispatch:
-    # Inputs the workflow accepts.
-    inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
-        # Default value if no value is explicitly provided
-        default: 'World'
-        # Input has to be provided for the workflow to run
-        required: true
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  push:
+    branches: [main]
 jobs:
-  # This workflow contains a single job called "greet"
-  greet:
-    # The type of runner that the job will run on
+
+  build:
+    name: Build
     runs-on: ubuntu-latest
-    
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Runs a single command using the runners shell
-    - name: Create a pem file
-      run: echo "${{ secrets.AWS_PEM_KEY }}" | tr -d '\r' > key.pem
-    
-    - name: Change keyfile permission
-      run: chmod 400 key.pem
-    
-    - name: Connect to EC2 Instance
-      run: ssh -i key.pem -o "StrictHostKeyChecking no" ec2-user@13.40.169.202
-    
-    - name: Traverse into Repository
-      run: cd notes-webapp
-      
-    - name: Update the Repository
-      run: git pull
-    
-    - name: Build and Deploy Application
-      run: docker-compose up --build -d
-      
-      
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: 13.40.169.202
+        username: ec2-user
+        key: ${{ secrets.AWS_PEM_KEY }}
+        port: 22
+        script: |
+          cd notes-webapp
+          git pull origin master
+          docker system prune -a
+          docker-compose up --build -d
