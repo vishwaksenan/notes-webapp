@@ -1,7 +1,11 @@
-FROM node:16.15.1-slim
+FROM node:16.15.1-slim as builder
 WORKDIR /client
 COPY . .
 RUN npm install
 RUN npm run build
-RUN npm install -g serve
-CMD [ "serve", "-l", "5000", "-s", "build"]
+
+
+FROM nginx
+EXPOSE 3000
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /client/build /usr/share/nginx/html

@@ -15,8 +15,6 @@ interface NewNoteType {
   description: string
 }
 
-axios.defaults.baseURL = process.env.REACT_APP_HOST_URL
-
 function App() {
   const [notes, setNotes] = useState<NotesDetails[]>([]);
   const [notesTitle, setNotesTitle] = useState<string[]>([]);

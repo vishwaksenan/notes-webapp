@@ -1,16 +1,27 @@
-version: '3.3'
+version: "3"
 services:
-  express-server:
-    build: ./server
-    image: express-server
-    ports:
-      - "3000:8081"
-
-  react-client:
-    build: ./client
-    image: react-client
-    ports: 
-      - "80:5000"
+  nginx:
     depends_on:
-      - express-server
+      - api
+      - client
+    restart: always
+    build:
+      context: ./nginx
+    ports:
+      - "3050:80"
+  api:
+    build:
+      context: "./server"
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+
+  client:
+    stdin_open: true
+    build:
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+
   
