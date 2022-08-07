@@ -51,6 +51,10 @@ const CardViewComponent = ({ NotesDetails, fetchContent, NotesPos }: NotesProps)
         title: topic.value,
         description: desc.value
       }
+      if(process.env.NODE_ENV == "development"){
+        await axios.post('/noteUpdate', updatenote)
+        fetchContent('/', pos)
+      }
       await axios.post('/api/noteUpdate', updatenote)
       fetchContent('/api/', pos)
     }
@@ -61,9 +65,14 @@ const CardViewComponent = ({ NotesDetails, fetchContent, NotesPos }: NotesProps)
     const deleteNote = {
       id: noteid
     }
-    await axios.post('/api/noteDelete', deleteNote);
-    (pos > 0) ? fetchContent('/api/', pos - 1): fetchContent('/api/', pos)
-    
+    if(process.env.NODE_ENV == "development"){
+      await axios.post('/noteDelete', deleteNote);
+      (pos > 0) ? fetchContent('/', pos - 1): fetchContent('/api/', pos)
+    }
+    else{
+      await axios.post('/api/noteDelete', deleteNote);
+      (pos > 0) ? fetchContent('/api/', pos - 1): fetchContent('/api/', pos)
+    }
   }
 
   return (

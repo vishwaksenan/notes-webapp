@@ -15,6 +15,10 @@ interface NewNoteType {
   description: string
 }
 
+if(process.env.NODE_ENV == 'development'){
+  axios.defaults.baseURL = process.env.REACT_APP_HOST_URL
+}
+
 function App() {
   const [notes, setNotes] = useState<NotesDetails[]>([]);
   const [notesTitle, setNotesTitle] = useState<string[]>([]);
@@ -27,7 +31,12 @@ function App() {
       title:'Title',
       description:'Description',
     }
-    await axios.post('/noteInsert/', newNote);
+    if(process.env.NODE_ENV == 'development'){
+      await axios.post('/noteInsert/', newNote);
+      fetchNotes('/', selectedPos);
+      return
+    }
+    await axios.post('/api/noteInsert/', newNote);
     fetchNotes('/api/', selectedPos);
   }
 
@@ -60,8 +69,13 @@ function App() {
   }
 
   useEffect(() => {
-    const url:string = "/api/"
-    fetchNotes(url);
+    if(process.env.NODE_ENV == 'development'){
+      fetchNotes('/', selectedPos);
+    }
+    else{
+      fetchNotes("/api/");
+    }
+    
     return () => {}
   }, [])
   

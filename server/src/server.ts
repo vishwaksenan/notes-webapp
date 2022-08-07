@@ -89,7 +89,7 @@ app.post('/noteDelete/', async (req:Request, res:Response) => {
 })
 
 
-app.post('/api/noteInsert', async (req: Request, res: Response) => {
+app.post('/noteInsert', async (req: Request, res: Response) => {
     const NoteObj = new Notes({
         title: req.body.title,
         description: req.body.title, 
