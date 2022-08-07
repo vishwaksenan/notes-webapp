@@ -1,2 +1,4 @@
-server/dist/*
-server/jet-logger.log
+/server/dist/*
+/server/jet-logger.log
+/server/node_modules/
+/client/node_modules/

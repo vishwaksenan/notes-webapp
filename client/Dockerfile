@@ -3,4 +3,5 @@ WORKDIR /client
 COPY . .
 RUN npm install
 RUN npm run build
-CMD [ "npm", "start" ]
+RUN npm install -g serve
+CMD [ "serve", "-l", "5000", "-s", "build"]
