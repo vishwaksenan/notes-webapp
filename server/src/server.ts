@@ -70,12 +70,12 @@ const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
 
 // Serve index.html file
-app.get('/', async (_: Request, res: Response) => {
+app.get('/api/', async (_: Request, res: Response) => {
     const notes = await Notes.find();
     res.send(notes);
 });
 
-app.post('/noteUpdate/', async (req: Request, res:Response) => {
+app.post('/api/noteUpdate/', async (req: Request, res:Response) => {
     const foundPostObj = new Notes(await Notes.findOne({ _id: req.body.id }));
     foundPostObj.title = req.body.title;
     foundPostObj.description = req.body.description;
@@ -83,13 +83,13 @@ app.post('/noteUpdate/', async (req: Request, res:Response) => {
     res.send('Record successfully updated')
 })
 
-app.post('/noteDelete/', async (req:Request, res:Response) => {
+app.post('/api/noteDelete/', async (req:Request, res:Response) => {
     await Notes.findByIdAndDelete({ _id: req.body.id })
     res.send('Record Deleted')
 })
 
 
-app.post('/noteInsert', async (req: Request, res: Response) => {
+app.post('/api/noteInsert', async (req: Request, res: Response) => {
     const NoteObj = new Notes({
         title: req.body.title,
         description: req.body.title, 

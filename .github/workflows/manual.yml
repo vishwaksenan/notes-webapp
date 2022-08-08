@@ -17,6 +17,7 @@ jobs:
         port: 22
         script: |
           cd notes-webapp
-          git pull origin main
+          git checkout main
+          git pull
           docker system prune -a -f
           docker-compose up --build -d

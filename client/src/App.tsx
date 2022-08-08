@@ -31,11 +31,6 @@ function App() {
       title:'Title',
       description:'Description',
     }
-    if(process.env.NODE_ENV == 'development'){
-      await axios.post('/noteInsert/', newNote);
-      fetchNotes('/', selectedPos);
-      return
-    }
     await axios.post('/api/noteInsert/', newNote);
     fetchNotes('/api/', selectedPos);
   }
@@ -69,13 +64,7 @@ function App() {
   }
 
   useEffect(() => {
-    if(process.env.NODE_ENV == 'development'){
-      fetchNotes('/', selectedPos);
-    }
-    else{
-      fetchNotes("/api/");
-    }
-    
+    fetchNotes("/api/");
     return () => {}
   }, [])
   

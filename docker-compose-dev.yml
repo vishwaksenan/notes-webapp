@@ -12,16 +12,10 @@ services:
   api:
     build:
       context: ./server
-    volumes:
-      - /app/node_modules
-      - ./server:/app
+      dockerfile: Dockerfile.dev
 
   client:
     stdin_open: true
     build:
       context: ./client
-    volumes:
-      - /app/node_modules
-      - ./client:/app
-
-  
+      dockerfile: Dockerfile.dev

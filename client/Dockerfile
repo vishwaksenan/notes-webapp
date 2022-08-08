@@ -1,7 +1,7 @@
 FROM node:16.15.1-slim as builder
 WORKDIR /client
 COPY . .
-RUN npm install
+RUN npm ci --quiet
 RUN npm run build
 
 
