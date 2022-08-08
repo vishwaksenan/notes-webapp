@@ -34,7 +34,8 @@ export const CardDescription = styled.textarea`
   font-weight: normal;
   width: 100%;
   height: 300px;
-  overflow: scroll;
+  overflow: auto;
+  resize: none;
 ` 
 
 export const CardViewSettingsContainer = styled.div`

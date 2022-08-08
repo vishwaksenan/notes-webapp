@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 
 export const CardListContainer = styled.div`
-  border: 2px solid red;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
+  padding: 30px;
   justify-content: space-evenly;
 `
 
@@ -11,7 +12,9 @@ export const CardListSection = styled.div`
   margin: 2px;
   height: 60px;
   width: 100px;
-  border: 2px solid grey;
+  border-top: 2px solid lightgrey;
+  border-bottom: 2px solid lightgrey;
+  /* border-radius: 10px; */
   cursor: pointer;
   :hover{
     color: aqua;
